@@ -1,0 +1,36 @@
+﻿# Java build artifacts
+*.class
+*.jar
+*.war
+
+# jpackage / Launch4j outputs
+output/
+output2/
+output3/
+dist/
+build/
+installer/
+
+# Personal data
+data.txt
+.finansapp/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+nbproject/
+build.xml
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs and temp
+*.log
+*.tmp
+manifest.txt
