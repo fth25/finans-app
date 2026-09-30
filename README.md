@@ -75,6 +75,5 @@ TRANSACTION;1;Maaş;15000.00;Maaş;INCOME;2024-03-01
 TRANSACTION;2;Market alışverişi;450.75;Market;EXPENSE;2024-03-02
 ```
 
-## 📄 Lisans
-
-MIT
+## License
+Apache License 2.0
