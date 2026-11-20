@@ -1,3 +1,7 @@
 name = "parabu"
 compatibility_date = "2026-11-20"
 pages_build_output_dir = "./dist"
+
+[vars]
+SUPABASE_URL = "https://akxwpxppoqoalqsjeabg.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xHICKVxmg2oVuYKf-ZigkQ_wGJJF6nx"

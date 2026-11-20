@@ -24,19 +24,20 @@ gerektirmez.
    `web` seçin.
 3. Framework preset olarak **None**, build command olarak `npm run build`, build output
    directory olarak `dist` seçin.
-4. Supabase **Settings > API Keys** bölümünden yeni **Publishable key** ve **Secret key**
-   anahtarlarını kullanın. Pages projesinin **Settings > Variables and Secrets** bölümünde
-   Production ortamına şu değerleri ekleyin:
+4. Proje `wrangler.toml` kullandığı için Cloudflare Dashboard'da düz değişken eklemek yerine
+   `web/wrangler.toml` içindeki `[vars]` bölümünü düzenleyin:
    - `SUPABASE_URL`: Supabase projesinin Project URL değeri.
-   - `SUPABASE_PUBLISHABLE_KEY`: Supabase'in `sb_publishable_...` anahtarı. Bu anahtarın
-     tarayıcıya verilmesi normaldir; erişimi veritabanındaki RLS politikaları sınırlar.
-   - `SUPABASE_SECRET_KEY`: Supabase'in `sb_secret_...` anahtarı. Bunu yalnızca **Secret**
-     olarak kaydedin; koda, GitHub'a veya kullanıcı arayüzüne koymayın.
-5. İlk yayın tamamlanınca Cloudflare Pages adresinizi Supabase Site URL ve Redirect URLs
+   - `SUPABASE_PUBLISHABLE_KEY`: Supabase **Settings > API Keys** bölümündeki yeni
+     `sb_publishable_...` anahtarı. Bu anahtarın tarayıcıya verilmesi normaldir; erişimi
+     veritabanındaki RLS politikaları sınırlar.
+5. Supabase'ten yeni `sb_secret_...` anahtarını alın. Cloudflare Pages **Settings > Variables
+   and Secrets** bölümünde `SUPABASE_SECRET_KEY` adıyla **Secret** olarak ekleyin. Değeri
+   koda, `wrangler.toml` dosyasına, GitHub'a veya kullanıcı arayüzüne koymayın.
+6. İlk yayın tamamlanınca Cloudflare Pages adresinizi Supabase Site URL ve Redirect URLs
    ayarlarına ekleyin. Yeniden deploy edin.
-6. `/api/config` adresinin 200 döndürdüğünü, ardından kayıt, e-posta doğrulama, giriş,
+7. `/api/config` adresinin 200 döndürdüğünü, ardından kayıt, e-posta doğrulama, giriş,
    veri senkronizasyonu ve hesap silme akışlarını test edin.
-7. Yeni anahtarlarla çalışan dağıtımı doğruladıktan sonra Supabase **Settings > JWT Keys**
+8. Yeni anahtarlarla çalışan dağıtımı doğruladıktan sonra Supabase **Settings > JWT Keys**
    bölümünde **Previously used keys** altındaki eski `HS256` anahtarını **More options >
    Revoke** ile kaldırın. Önce yeni dağıtımı doğrulamadan eski anahtarı iptal etmeyin.
 
