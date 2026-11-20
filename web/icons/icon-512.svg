@@ -1,4 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="110" fill="#2563eb"/>
-  <text x="256" y="352" font-size="300" text-anchor="middle" fill="#ffffff" font-family="-apple-system, Segoe UI, sans-serif" font-weight="700">B</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 192 192" fill="none">
+  <defs>
+    <linearGradient id="background" x1="25" y1="18" x2="165" y2="176" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#173B63"/>
+      <stop offset="1" stop-color="#102842"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="60" y1="42" x2="128" y2="136" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4FFF9"/>
+      <stop offset="1" stop-color="#CFF8E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="44" fill="url(#background)"/>
+  <circle cx="96" cy="96" r="67" fill="#FFFFFF" fill-opacity=".035"/>
+  <circle cx="92" cy="91" r="48" fill="url(#coin)" stroke="#77E2B9" stroke-width="3"/>
+  <path d="M78 120V62H99C116 62 126 71 126 86C126 101 116 110 99 110H78" stroke="#17465A" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+  <path d="M116 71L129 58L140 63L155 47" stroke="#F5C95E" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+  <path d="M143 47H155V59" stroke="#F5C95E" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
 </svg>

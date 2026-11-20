@@ -173,11 +173,9 @@ body {
   margin-bottom:58px; font-size:21px; font-weight:800; letter-spacing:-.03em;
 }
 .welcome-logo {
-  width:42px; height:42px; display:inline-grid; place-items:center;
-  border-radius:14px; color:white;
-  background:linear-gradient(135deg,#5e7cff,#8062ef);
-  box-shadow:0 10px 24px rgba(94,124,255,.25);
-  font-size:19px;
+  width:42px; height:42px; display:block; flex:none;
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(20,59,100,.25);
 }
 .welcome-badge {
   margin-left:4px; padding:5px 9px; border-radius:999px;
@@ -315,14 +313,11 @@ body {
 .brand .logo {
   width: 36px;
   height: 36px;
-  display: inline-grid;
-  place-items: center;
+  display: block;
+  flex: none;
+  object-fit: cover;
   border-radius: 12px;
-  background: linear-gradient(135deg, #5e7cff, #8062ef);
-  color: white;
-  font-size: 18px;
-  font-weight: 800;
-  filter: drop-shadow(0 2px 6px rgba(59,130,246,0.3));
+  filter: drop-shadow(0 2px 6px rgba(20,59,100,.3));
   transition: transform 0.3s var(--ease-spring);
 }
 .brand:hover .logo { transform: rotate(-10deg) scale(1.1); }

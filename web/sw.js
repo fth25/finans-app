@@ -1,4 +1,4 @@
-const CACHE = 'parabu-v7';
+const CACHE = 'parabu-v8';
 
 const ASSETS = [
   './',
