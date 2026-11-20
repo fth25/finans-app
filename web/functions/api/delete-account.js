@@ -10,12 +10,14 @@ function jsonResponse(body, status = 200) {
 
 export async function onRequestPost({ request, env }) {
   const supabaseUrl = env.SUPABASE_URL?.replace(/\/+$/, '');
-  const anonKey = env.SUPABASE_ANON_KEY;
+  const anonKey = env.SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_ANON_KEY;
+  const secretKey = env.SUPABASE_SECRET_KEY;
   const serviceRoleKey = env.SUPABASE_SERVICE_ROLE_KEY;
+  const adminApiKey = secretKey || serviceRoleKey;
   const authorization = request.headers.get('Authorization') || '';
   const accessToken = authorization.startsWith('Bearer ') ? authorization.slice(7) : '';
 
-  if (!supabaseUrl || !anonKey || !serviceRoleKey) {
+  if (!supabaseUrl || !anonKey || !adminApiKey) {
     return jsonResponse({ error: 'Hesap silme servisi yapılandırılmamış.' }, 503);
   }
   if (!accessToken) {
@@ -46,8 +48,8 @@ export async function onRequestPost({ request, env }) {
     {
       method: 'DELETE',
       headers: {
-        apikey: serviceRoleKey,
-        Authorization: `Bearer ${serviceRoleKey}`,
+        apikey: adminApiKey,
+        Authorization: `Bearer ${secretKey ? accessToken : serviceRoleKey}`,
       },
     }
   );

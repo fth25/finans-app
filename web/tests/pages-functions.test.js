@@ -14,15 +14,15 @@ describe('Pages config endpoint', () => {
     const response = await onRequestGet({
       env: {
         SUPABASE_URL: 'https://example.supabase.co/',
-        SUPABASE_ANON_KEY: 'public-key',
-        SUPABASE_SERVICE_ROLE_KEY: 'private-key',
+        SUPABASE_PUBLISHABLE_KEY: 'publishable-key',
+        SUPABASE_SECRET_KEY: 'private-key',
       },
     });
 
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), {
       supabaseUrl: 'https://example.supabase.co',
-      supabaseAnonKey: 'public-key',
+      supabaseAnonKey: 'publishable-key',
     });
     assert.equal(response.headers.get('cache-control'), 'no-store');
   });
@@ -30,6 +30,21 @@ describe('Pages config endpoint', () => {
   it('reports missing deployment configuration', async () => {
     const response = await onRequestGet({ env: {} });
     assert.equal(response.status, 503);
+  });
+
+  it('continues to accept the legacy public key during migration', async () => {
+    const response = await onRequestGet({
+      env: {
+        SUPABASE_URL: 'https://example.supabase.co',
+        SUPABASE_ANON_KEY: 'legacy-public-key',
+      },
+    });
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), {
+      supabaseUrl: 'https://example.supabase.co',
+      supabaseAnonKey: 'legacy-public-key',
+    });
   });
 });
 
@@ -75,7 +90,35 @@ describe('Account deletion endpoint', () => {
     assert.equal(requests.length, 2);
     assert.equal(requests[0].options.headers.Authorization, 'Bearer user-access-token');
     assert.equal(requests[1].options.headers.Authorization, 'Bearer private-key');
+    assert.equal(requests[1].options.headers.apikey, 'private-key');
     assert.equal(requests[1].options.method, 'DELETE');
+  });
+
+  it('uses a Supabase secret key only as the API key', async () => {
+    const requests = [];
+    globalThis.fetch = async (url, options) => {
+      requests.push({ url: String(url), options });
+      return requests.length === 1
+        ? Response.json({ id: '01234567-89ab-cdef-0123-456789abcdef' })
+        : new Response(null, { status: 204 });
+    };
+
+    const response = await onRequestPost({
+      request: new Request('https://parabu.example/api/delete-account', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer user-access-token' },
+      }),
+      env: {
+        SUPABASE_URL: 'https://example.supabase.co',
+        SUPABASE_PUBLISHABLE_KEY: 'publishable-key',
+        SUPABASE_SECRET_KEY: 'secret-key',
+      },
+    });
+
+    assert.equal(response.status, 200);
+    assert.equal(requests[0].options.headers.apikey, 'publishable-key');
+    assert.equal(requests[1].options.headers.apikey, 'secret-key');
+    assert.equal(requests[1].options.headers.Authorization, 'Bearer user-access-token');
   });
 
   it('does not report success when the admin deletion fails', async () => {
