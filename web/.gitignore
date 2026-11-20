@@ -1,0 +1,10 @@
+/.env
+/.env.*
+server/.env
+server/data.db
+server/data.db-shm
+server/data.db-wal
+server/node_modules/
+node_modules/
+dist/
+.wrangler/

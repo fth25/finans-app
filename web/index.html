@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1c" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Parabu — Gelir-gider takibi, kredi hesaplama ve bütçe yönetimi.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Parabu — Kişisel Finans Takibi">
+  <meta property="og:description" content="Gelir-gider takibi, bütçe yönetimi ve grafikler.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+
+  <title>Parabu — Kişisel Finans Takibi</title>
+
+  <link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+
+  <!-- Inter font (CSS'te kullanılıyor) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<noscript>
+  <div style="padding:20px;background:#fee2e2;color:#991b1b;text-align:center;font-family:sans-serif">
+    <strong>!</strong> Parabu'nun çalışması için JavaScript gerekli. Lütfen tarayıcınızda JavaScript'i etkinleştirin.
+  </div>
+</noscript>
+
+<section id="welcomeScreen" class="welcome-screen" aria-label="Parabuya hoş geldiniz">
+  <div class="welcome-orb orb-one"></div>
+  <div class="welcome-orb orb-two"></div>
+  <div class="welcome-shell">
+    <div class="welcome-brand">
+      <span class="welcome-logo" aria-hidden="true">B</span>
+      <span>Parabu</span>
+      <span class="welcome-badge">Kişisel finans</span>
+    </div>
+    <div class="welcome-grid">
+      <div class="welcome-copy">
+        <span class="welcome-kicker">Paranızı daha akıllı yönetin</span>
+        <h1>Bugünün finansı,<br><em>yarının özgürlüğü.</em></h1>
+        <p>Gelirlerini, giderlerini ve bütçelerini tek yerde takip et. Finansal hedeflerine net adımlarla yaklaş.</p>
+        <div class="welcome-actions">
+          <button type="button" id="welcomeRegister" class="welcome-primary">
+            Ücretsiz hesap oluştur <span aria-hidden="true">→</span>
+          </button>
+          <button type="button" id="welcomeLogin" class="welcome-secondary">Zaten hesabım var · Giriş yap</button>
+        </div>
+        <div class="welcome-trust">
+          <span><span class="line-symbol" aria-hidden="true">⌑</span> Yerel & bulut depolama</span>
+          <span><span class="line-symbol" aria-hidden="true">↯</span> Hızlı senkronizasyon</span>
+        </div>
+      </div>
+      <div class="welcome-preview" aria-label="Finans önizleme">
+        <div class="preview-header">
+          <div>
+            <span>Hesabınla takip et</span>
+            <strong id="welcomeBalance">—</strong>
+          </div>
+          <span class="preview-status">Güvenli <b>Hesap</b></span>
+        </div>
+        <div class="preview-chart" aria-hidden="true">
+          <div class="preview-chart-grid"></div>
+          <svg viewBox="0 0 460 180" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="welcomeArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7c5cff" stop-opacity=".36"/>
+                <stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="preview-area" d="M0 150 C55 142 70 110 115 118 C165 128 174 78 225 88 C275 98 300 44 345 62 C395 82 420 28 460 36 L460 180 L0 180 Z" fill="url(#welcomeArea)"/>
+            <path class="preview-line" d="M0 150 C55 142 70 110 115 118 C165 128 174 78 225 88 C275 98 300 44 345 62 C395 82 420 28 460 36" fill="none" stroke="#7c5cff" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="preview-metrics">
+          <div><span>Gelir</span><strong class="preview-income" id="welcomeIncome">—</strong></div>
+          <div><span>Gider</span><strong class="preview-expense" id="welcomeExpense">—</strong></div>
+          <div><span>Tasarruf</span><strong id="welcomeSavings">—</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="welcome-feature-row">
+      <div><span>01</span><p><strong>Akıllı özetler</strong><small>Paranın anlık durumu</small></p></div>
+      <div><span>02</span><p><strong>Bütçe takibi</strong><small>Limitleri aşma</small></p></div>
+      <div><span>03</span><p><strong>Finans araçları</strong><small>Taksit ve birikim hesapları</small></p></div>
+    </div>
+    <footer class="welcome-footer">
+      <span>© 2026 Parabu · Kişisel finansını kontrol et</span>
+      <nav aria-label="Yasal bağlantılar">
+        <button type="button" data-policy="privacy">Gizlilik Politikası</button>
+        <button type="button" data-policy="terms">Kullanım Koşulları</button>
+        <button type="button" data-policy="privacy">Veri güvenliği</button>
+      </nav>
+    </footer>
+  </div>
+</section>
+
+<div id="appShell" class="app-shell">
+<header class="app-header">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">B</span>
+    <h1>Parabu</h1>
+  </div>
+  <div class="header-actions">
+    <div id="authArea"></div>
+    <button id="themeToggle" class="btn-icon theme-symbol" title="Tema değiştir" aria-label="Tema değiştir">◐</button>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Özet kartları -->
+  <section class="summary-grid" aria-label="Özet">
+    <div class="card summary-card clickable" id="initialCard" title="Başlangıç bakiyesini düzenle" role="button" tabindex="0">
+      <div class="summary-top">
+        <span class="summary-icon initial" aria-hidden="true">◈</span>
+        <div class="summary-label">Başlangıç Bakiyesi</div>
+      </div>
+      <div class="summary-value" id="sumInitial">—</div>
+      <div class="edit-hint"><span aria-hidden="true">✎</span> düzenlemek için tıkla</div>
+    </div>
+    <div class="card summary-card income">
+      <div class="summary-top">
+        <span class="summary-icon income" aria-hidden="true">↗</span>
+        <div class="summary-label">Toplam Gelir</div>
+      </div>
+      <div class="summary-value" id="sumIncome">—</div>
+    </div>
+    <div class="card summary-card expense">
+      <div class="summary-top">
+        <span class="summary-icon expense" aria-hidden="true">↘</span>
+        <div class="summary-label">Toplam Gider</div>
+      </div>
+      <div class="summary-value" id="sumExpense">—</div>
+    </div>
+    <div class="card summary-card balance">
+      <div class="summary-top">
+        <span class="summary-icon balance" aria-hidden="true">◎</span>
+        <div class="summary-label">Güncel Bakiye</div>
+      </div>
+      <div class="summary-value" id="sumBalance">—</div>
+    </div>
+  </section>
+
+  <!-- Sekmeler -->
+  <nav class="tabs" role="tablist" aria-label="Bölümler">
+    <button class="tab active" data-tab="transactions" role="tab" aria-selected="true">İşlemler</button>
+    <button class="tab" data-tab="budgets" role="tab" aria-selected="false">Bütçeler</button>
+    <button class="tab" data-tab="goals" role="tab" aria-selected="false">Birikim hedefleri</button>
+    <button class="tab" data-tab="tools" role="tab" aria-selected="false">Finans araçları</button>
+    <button class="tab" data-tab="charts" role="tab" aria-selected="false">Grafikler</button>
+  </nav>
+
+  <!-- İşlemler -->
+  <section class="tab-content active" data-tab="transactions">
+    <div class="card">
+      <div class="toolbar">
+        <input type="search" id="searchInput" placeholder="Açıklama veya kategori ara...">
+        <select id="monthFilter" aria-label="Ay filtresi">
+          <option value="all">Tüm Aylar</option>
+        </select>
+        <select id="typeFilter" aria-label="İşlem türü filtresi">
+          <option value="all">Tüm İşlemler</option>
+          <option value="INCOME">Gelirler</option>
+          <option value="EXPENSE">Giderler</option>
+        </select>
+        <button id="exportBtn" class="btn-secondary"><span class="button-symbol" aria-hidden="true">↓</span> CSV</button>
+        <button id="addTxBtn" class="btn-primary">+ Yeni İşlem</button>
+      </div>
+      <div class="insights-grid" id="insightsGrid" aria-label="Finansal özet">
+        <div class="insight">
+          <span class="insight-icon" aria-hidden="true">▥</span>
+          <div>
+            <span class="insight-label">Net akış</span>
+            <strong id="insightNet">—</strong>
+          </div>
+        </div>
+        <div class="insight">
+          <span class="insight-icon" aria-hidden="true">₺</span>
+          <div>
+            <span class="insight-label">Tasarruf oranı</span>
+            <strong id="insightSavings">—</strong>
+          </div>
+        </div>
+        <div class="insight">
+          <span class="insight-icon" aria-hidden="true">⌑</span>
+          <div>
+            <span class="insight-label">En büyük gider</span>
+            <strong id="insightTopExpense">—</strong>
+          </div>
+        </div>
+        <div class="insight">
+          <span class="insight-icon" aria-hidden="true">▦</span>
+          <div>
+            <span class="insight-label">3 aylık ort. net</span>
+            <strong id="insightAverage">—</strong>
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="txTable">
+          <thead>
+            <tr>
+              <th>Tarih</th>
+              <th>Açıklama</th>
+              <th>Kategori</th>
+              <th>Tür</th>
+              <th class="right">Tutar</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="emptyTx" class="empty hidden">Henüz işlem yok. "+ Yeni İşlem" ile başla.</div>
+    </div>
+  </section>
+
+  <section class="tab-content" data-tab="goals">
+    <div class="card">
+      <div class="toolbar">
+        <div>
+          <h3>Birikim hedefleri</h3>
+          <span class="muted">Hedef belirle, ilerlemeni takip et.</span>
+        </div>
+      </div>
+      <form id="goalForm" class="goal-form">
+        <input type="text" id="goalName" placeholder="Hedef adı (örn. Acil durum fonu)" maxlength="60" required>
+        <input type="number" id="goalTarget" placeholder="Hedef tutarı (₺)" min="0.01" step="0.01" required>
+        <input type="number" id="goalSaved" placeholder="Şu ana kadar biriken (₺)" min="0" step="0.01" value="0">
+        <input type="date" id="goalDate" aria-label="Hedef tarihi (isteğe bağlı)">
+        <button type="submit" class="btn-primary">Hedef ekle</button>
+      </form>
+      <div id="goalList" class="goal-list"></div>
+    </div>
+  </section>
+
+  <!-- Bütçeler -->
+  <section class="tab-content" data-tab="budgets">
+    <div class="card">
+      <div class="toolbar">
+        <h3>Bütçe Durumu</h3>
+        <span class="muted" id="budgetMonthLabel" style="margin-left:auto"></span>
+      </div>
+      <form id="budgetForm" class="budget-form">
+        <input type="text" id="budgetCategory" placeholder="Kategori" required list="categoryList" maxlength="50">
+        <input type="number" id="budgetAmount" placeholder="Aylık limit (₺)" step="0.01" min="0.01" required>
+        <button type="submit" class="btn-primary">Ekle / Güncelle</button>
+      </form>
+      <div id="budgetList" class="budget-list"></div>
+    </div>
+  </section>
+
+  <section class="tab-content" data-tab="tools">
+    <div class="calculator-grid">
+      <article class="card calculator-card">
+        <div class="calculator-heading">
+          <span class="calculator-icon" aria-hidden="true">%</span>
+          <div><h3>Kredi taksit hesaplama</h3><p class="muted">Aylık faiz ve vade ile yaklaşık ödeme planı.</p></div>
+        </div>
+        <form id="loanCalculatorForm" class="calculator-form">
+          <label>Kredi tutarı (₺)<input type="number" id="loanAmount" min="1" step="0.01" required></label>
+          <label>Aylık faiz (%)<input type="number" id="loanRate" min="0" max="100" step="0.01" required></label>
+          <label>Vade (ay)<input type="number" id="loanTerm" min="1" max="600" step="1" required></label>
+          <button type="submit" class="btn-primary">Taksitleri hesapla</button>
+        </form>
+        <div id="loanResult" class="calculator-result hidden" aria-live="polite">
+          <div class="result-metrics">
+            <div><span>Aylık taksit</span><strong id="loanMonthlyPayment">—</strong></div>
+            <div><span>Toplam geri ödeme</span><strong id="loanTotalPayment">—</strong></div>
+            <div><span>Toplam faiz</span><strong id="loanTotalInterest">—</strong></div>
+          </div>
+          <h4>İlk 12 taksit</h4>
+          <div class="schedule-wrap"><table class="schedule-table"><thead><tr><th>Taksit</th><th>Anapara</th><th>Faiz</th><th>Kalan</th></tr></thead><tbody id="loanSchedule"></tbody></table></div>
+          <p class="calculator-note">Tahmini hesaplamadır; vergi, ücret, sigorta ve kurum koşulları dahil değildir.</p>
+        </div>
+      </article>
+
+      <article class="card calculator-card">
+        <div class="calculator-heading">
+          <span class="calculator-icon" aria-hidden="true">↗</span>
+          <div><h3>Birikim büyüme hesabı</h3><p class="muted">Düzenli ekleme ve varsayılan getiriyle örnek birikimi gör.</p></div>
+        </div>
+        <form id="savingsCalculatorForm" class="calculator-form">
+          <label>Başlangıç tutarı (₺)<input type="number" id="savingsStart" min="0" step="0.01" value="0" required></label>
+          <label>Aylık ekleme (₺)<input type="number" id="savingsMonthly" min="0" step="0.01" required></label>
+          <label>Yıllık varsayımsal oran (%)<input type="number" id="savingsRate" min="0" max="100" step="0.01" required></label>
+          <label>Süre (yıl)<input type="number" id="savingsYears" min="1" max="80" step="1" required></label>
+          <button type="submit" class="btn-primary">Birikimi hesapla</button>
+        </form>
+        <div id="savingsResult" class="calculator-result hidden" aria-live="polite">
+          <div class="result-metrics">
+            <div><span>Tahmini toplam</span><strong id="savingsFuture">—</strong></div>
+            <div><span>Toplam katkı</span><strong id="savingsContributions">—</strong></div>
+            <div><span>Varsayımsal artış</span><strong id="savingsGrowth">—</strong></div>
+          </div>
+          <p class="calculator-note">Getiri garantisi değildir; enflasyon, vergi, ücret ve oran değişimleri hesaba katılmaz.</p>
+        </div>
+      </article>
+
+      <article class="card calculator-card credit-card">
+        <div class="calculator-heading">
+          <span class="calculator-icon" aria-hidden="true">0–100</span>
+          <div><h3>Kredi sağlığı simülasyonu</h3><p class="muted">Girdiğiniz bilgilere göre açıklanabilir bir borç yönetimi göstergesi.</p></div>
+        </div>
+        <form id="creditScoreForm" class="calculator-form">
+          <label>Son dönemde gecikmiş ödeme
+            <select id="creditLatePayments"><option value="0">Yok</option><option value="1">1 kez</option><option value="2">2 veya daha fazla</option></select>
+          </label>
+          <label>Kredi kullanım oranı (%)<input type="number" id="creditUtilization" min="0" max="100" step="1" required></label>
+          <label>Kredi geçmişi (yıl)<input type="number" id="creditHistory" min="0" max="80" step="1" required></label>
+          <label>Aylık net gelir (₺)<input type="number" id="creditIncome" min="1" step="0.01" required></label>
+          <label>Aylık borç ödemeleri (₺)<input type="number" id="creditDebt" min="0" step="0.01" value="0" required></label>
+          <button type="submit" class="btn-primary">Göstergemi hesapla</button>
+        </form>
+        <div id="creditResult" class="calculator-result hidden" aria-live="polite">
+          <div class="credit-score-display"><strong id="creditScoreValue">—</strong><span>/ 100</span><b id="creditScoreLabel"></b></div>
+          <ul id="creditFactors" class="credit-factors"></ul>
+          <p class="calculator-note">Basit modelin ağırlıkları: ödeme geçmişi 40, kullanım oranı 30, kredi geçmişi 15, borç/gelir oranı 15 puan. Bu, resmi kredi notu veya kredi onayı değildir. Finansal tavsiye sayılmaz; bilgileriniz kaydedilmez.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Grafikler -->
+  <section class="tab-content" data-tab="charts">
+    <div class="charts-grid">
+      <div class="card">
+        <h3 style="margin:0">Kategori Bazlı Giderler</h3>
+        <div class="chart-wrap">
+          <canvas id="pieChart"></canvas>
+          <div class="chart-empty hidden" id="pieEmpty">Bu dönemde gider verisi yok</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0">Son 6 Ay — Gelir / Gider</h3>
+        <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  Parabu · Web sürümü · <span id="syncStatus">Yerel</span>
+  <div class="footer-actions">
+    <button id="exportJsonBtn">JSON Yedekle</button>
+    <button id="importJsonBtn">JSON Geri Yükle</button>
+    <button id="privacyBtn">Veri & Gizlilik</button>
+    <button data-policy="privacy">Gizlilik Politikası</button>
+    <button data-policy="terms">Kullanım Koşulları</button>
+    <button id="resetBtn">Tüm verileri sıfırla</button>
+  </div>
+  <input type="file" id="importJsonInput" accept="application/json,.json" style="display:none">
+</footer>
+</div>
+
+<!-- İşlem dialogu -->
+<dialog id="txDialog">
+  <form id="txForm">
+    <h2 id="txDialogTitle">Yeni İşlem</h2>
+    <input type="hidden" id="txId">
+    <label>Açıklama
+      <input type="text" id="txDescription" required maxlength="100" autocomplete="off">
+    </label>
+    <div class="row">
+      <label>Tutar (₺)
+        <input type="number" id="txAmount" step="0.01" min="0.01" required>
+      </label>
+      <label>Tür
+        <select id="txType">
+          <option value="EXPENSE">Gider</option>
+          <option value="INCOME">Gelir</option>
+        </select>
+      </label>
+    </div>
+    <label>Kategori
+      <input type="text" id="txCategory" required maxlength="50" list="categoryList" autocomplete="off">
+    </label>
+    <label>Tarih
+      <input type="date" id="txDate" required>
+    </label>
+    <div class="dialog-actions">
+      <button type="button" class="btn-secondary" id="txCancel">İptal</button>
+      <button type="submit" class="btn-primary">Kaydet</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Başlangıç bakiyesi dialogu -->
+<dialog id="initDialog">
+  <form id="initForm">
+    <h2>Başlangıç Bakiyesi</h2>
+    <p class="muted" style="margin:0;font-size:13px">Uygulamaya başlarken sahip olduğun nakit bakiye.</p>
+    <label>Bakiye (₺)
+      <input type="number" id="initAmount" step="0.01" required>
+    </label>
+    <div class="dialog-actions">
+      <button type="button" class="btn-secondary" id="initCancel">İptal</button>
+      <button type="submit" class="btn-primary">Kaydet</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Giriş / Kayıt dialogu -->
+<dialog id="authDialog">
+  <form id="authForm">
+    <h2 id="authTitle">Giriş Yap</h2>
+    <div class="auth-tabs" role="tablist">
+      <button type="button" class="auth-tab active" data-mode="login" role="tab" aria-selected="true">Giriş</button>
+      <button type="button" class="auth-tab" data-mode="register" role="tab" aria-selected="false">Kayıt</button>
+    </div>
+    <label>Email
+      <input type="email" id="authEmail" required autocomplete="email">
+    </label>
+    <label>Şifre
+      <input type="password" id="authPassword" required minlength="6" autocomplete="current-password">
+    </label>
+    <div class="consent-row hidden" id="authConsent">
+      <input type="checkbox" id="authPolicyAccept">
+      <div class="consent-copy">
+        <div>
+          <button type="button" class="text-link" data-policy="terms">Kullanım Koşullarını</button>
+          ve
+          <button type="button" class="text-link" data-policy="privacy">Gizlilik Politikasını</button>
+        </div>
+        <label for="authPolicyAccept">Okudum ve kabul ediyorum.</label>
+      </div>
+    </div>
+    <div id="authError" class="auth-error hidden" role="alert" aria-live="polite"></div>
+    <div class="dialog-actions">
+      <button type="button" class="btn-secondary" id="authCancel">İptal</button>
+      <button type="submit" class="btn-primary" id="authSubmit">Giriş Yap</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Datalist + toast -->
+<datalist id="categoryList"></datalist>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<dialog id="policyDialog" class="policy-dialog">
+  <div class="policy-header">
+    <div>
+      <span class="policy-kicker">Parabu</span>
+      <h2 id="policyTitle">Gizlilik Politikası</h2>
+    </div>
+    <button type="button" class="btn-icon" id="policyClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="policy-content" id="policyContent"></div>
+  <div class="dialog-actions">
+    <button type="button" class="btn-primary" id="policyDone">Anladım</button>
+  </div>
+</dialog>
+
+<dialog id="privacyDialog" class="policy-dialog">
+  <div class="policy-header">
+    <div>
+      <span class="policy-kicker">Veri Merkezi</span>
+      <h2>Gizlilik Kontrolleri</h2>
+    </div>
+    <button type="button" class="btn-icon" id="privacyClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="privacy-grid">
+    <div class="privacy-stat">
+      <span>İşlem sayısı</span>
+      <strong id="privacyTxCount">0</strong>
+    </div>
+    <div class="privacy-stat">
+      <span>Bütçe sayısı</span>
+      <strong id="privacyBudgetCount">0</strong>
+    </div>
+    <div class="privacy-stat">
+      <span>Depolama</span>
+      <strong id="privacyStorage">Yerel</strong>
+    </div>
+  </div>
+  <div class="privacy-panel">
+    <h3>Verilerimin kontrolü</h3>
+    <p>Finans verileriniz tarayıcıda saklanır ve oturum açtığınızda hesabınızla senkronize edilir. JSON yedeği indirebilir veya hesabınızı ve bulut verilerinizi kalıcı olarak silebilirsiniz.</p>
+    <div class="privacy-actions">
+      <button type="button" class="btn-secondary" id="privacyExport">JSON yedek indir</button>
+      <button type="button" class="btn-secondary danger-action hidden" id="deleteCloudData">Hesabı ve bulut verilerini sil</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Kütüphaneler -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- Uygulama (sıra önemli) -->
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/features.js"></script>
+
+<!-- Service Worker kaydı -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW:', err));
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -77,3 +77,8 @@ TRANSACTION;2;Market alışverişi;450.75;Market;EXPENSE;2024-03-02
 
 ## License
 Apache License 2.0
+
+## Web sürümü (Parabu)
+
+Tarayıcı tabanlı Parabu uygulaması ve ücretsiz yayın adımları `web/` klasöründedir.
+Cloudflare Pages kurulumu için [web/DEPLOYMENT.md](web/DEPLOYMENT.md) dosyasına bakın.
