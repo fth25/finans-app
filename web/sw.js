@@ -1,4 +1,4 @@
-const CACHE = 'parabu-v8';
+const CACHE = 'parabu-v9';
 
 const ASSETS = [
   './',
@@ -8,8 +8,8 @@ const ASSETS = [
   './js/api.js',
   './js/features.js',
   './manifest.json',
-  './icons/icon-192.svg',
-  './icons/icon-512.svg',
+  './icons/parabu-mark-192.svg',
+  './icons/parabu-mark-512.svg',
   'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
 ];
 
